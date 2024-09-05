@@ -16,8 +16,8 @@ A Flutter application to display list of android versions.
 ## screenshots
 
 ![Android List Home Screen](assets/screenshots/view.png)
-![Input 1](assets/screenshots/input1.png)
-![Input 2](assets/screenshots/input2.png)
+![input1](https://github.com/user-attachments/assets/3f70f75d-e1b7-4f61-bc64-60f7bf69fa40)
+![input2](https://github.com/user-attachments/assets/824f9618-10d6-42cf-aed7-418fc57c9a96)
 
 ## Video Link
 
