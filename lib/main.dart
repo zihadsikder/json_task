@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:json_task/app/presentation/screens/version_screen.dart';
 
 void main () => runApp(const JsonTaskApp());
 
@@ -7,10 +8,10 @@ class JsonTaskApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Bmi Calculator',
+    return MaterialApp(
+      title: 'Json Task',
       debugShowCheckedModeBanner: false,
-      //home: HomeScreen(),
+      home: VersionScreen(),
     );
   }
 }
