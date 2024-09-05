@@ -23,7 +23,7 @@ class VersionScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         title: Text('Parsed Versions',
             style: AppTextStyles.titleStyle(
-                color: Colors.green.shade700, fontSize: 22)),
+                color: Colors.green.shade800, fontSize: 22)),
         content: SingleChildScrollView(
           child: ListBody(
             children: versions
