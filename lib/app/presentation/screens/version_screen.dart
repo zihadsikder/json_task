@@ -13,35 +13,81 @@ class VersionScreen extends StatelessWidget {
   final AndroidVersionRepositoryImpl repository =
       AndroidVersionRepositoryImpl();
 
-  void _showParsedData(BuildContext context, List<AndroidVersion> versions) {
+  void _showParsedData(BuildContext context, List<AndroidVersion> versions,
+      List<AndroidVersion> data) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (context) => Dialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        backgroundColor: Colors.white,
-        title: Text('Parsed Versions',
-            style: AppTextStyles.titleStyle(
-                color: Colors.green.shade800, fontSize: 22)),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: versions
-                .map((version) => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4.0),
-                      child: Text('${version.id}: ${version.title}',
+        child: Container(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            // Ensures the dialog sizes to its content
+            children: [
+              Text('Parsed Versions',
+                  style: AppTextStyles.titleStyle(
+                      color: Colors.green.shade800, fontSize: 22)),
+              const SizedBox(height: 16),
+              SizedBox(
+                height: 30, // Adjust height as needed
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: versions.length > 4 ? 3 : versions.length,
+                  itemBuilder: (context, index) {
+                    final version = versions[index];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text('${version.title}',
                           style: AppTextStyles.normalStyle()),
-                    ))
-                .toList(),
+                    );
+                  },
+                ),
+              ),
+              versions.length > 4
+                  ? SizedBox(
+                      height: 30, // Adjust height as needed
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: versions.length > 4 ? 3 : versions.length,
+                        itemBuilder: (context, index) {
+                          final version = versions[index + 3];
+                          return Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Text('${version.title}',
+                                style: AppTextStyles.normalStyle()),
+                          );
+                        },
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+              SizedBox(
+                height: 30, // Adjust height as needed
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: data.length,
+                  itemBuilder: (context, index) {
+                    final version = data[index];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text('${version.title}',
+                          style: AppTextStyles.normalStyle()),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: 16),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text('Close',
+                    style: AppTextStyles.normalStyle(color: Colors.green)),
+              ),
+            ],
           ),
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text('Close',
-                style: AppTextStyles.normalStyle(color: Colors.green)),
-          ),
-        ],
       ),
     );
   }
@@ -61,7 +107,8 @@ class VersionScreen extends StatelessWidget {
                 onPressed: () {
                   List<AndroidVersion> versions =
                       repository.getVersions(input1);
-                  _showParsedData(context, versions);
+                  List<AndroidVersion> data = repository.getData(input1);
+                  _showParsedData(context, versions, data);
                 },
               ),
               const SizedBox(height: 20),
@@ -70,7 +117,8 @@ class VersionScreen extends StatelessWidget {
                 onPressed: () {
                   List<AndroidVersion> versions =
                       repository.getVersions(input2);
-                  _showParsedData(context, versions);
+                  List<AndroidVersion> data = repository.getData2(input2);
+                  _showParsedData(context, versions, data);
                 },
               ),
             ],

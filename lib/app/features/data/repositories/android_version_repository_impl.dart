@@ -7,4 +7,13 @@ class AndroidVersionRepositoryImpl implements AndroidVersionRepository {
   List<AndroidVersion> getVersions(dynamic json) {
     return parseJson(json);
   }
+
+  @override
+  List<AndroidVersion> getData(dynamic json) {
+    return parseData(json);
+  }
+
+  List<AndroidVersion> getData2(dynamic json) {
+    return parseData2(json);
+  }
 }
